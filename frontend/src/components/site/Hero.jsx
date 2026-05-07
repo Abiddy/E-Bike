@@ -163,10 +163,10 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* RIGHT — contained video on white so the bike fits fully in frame */}
+        {/* RIGHT — floating contained video card on white */}
         <div
           data-testid="hero-right"
-          className="order-1 lg:order-2 relative bg-white w-full h-[55vh] sm:h-[65vh] lg:h-auto overflow-hidden flex items-center justify-center"
+          className="order-1 lg:order-2 relative bg-white w-full h-[55vh] sm:h-[65vh] lg:h-auto p-6 flex items-center justify-center"
         >
           <video
             ref={videoRef}
@@ -178,8 +178,12 @@ export const Hero = () => {
             playsInline
             loop={false}
             preload="auto"
-            className="w-full h-full object-contain"
-            style={{ opacity: 1, transition: "opacity 80ms linear" }}
+            className="w-full h-full object-contain bg-white"
+            style={{
+              opacity: 1,
+              transition: "opacity 80ms linear",
+              borderRadius: "24px",
+            }}
           />
         </div>
       </div>
