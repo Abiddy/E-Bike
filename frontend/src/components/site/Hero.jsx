@@ -163,27 +163,16 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* RIGHT — floating contained video card on white */}
+        {/* RIGHT — full-bleed static hero image */}
         <div
           data-testid="hero-right"
-          className="order-1 lg:order-2 relative bg-white w-full h-[55vh] sm:h-[65vh] lg:h-auto p-6 flex items-center justify-center"
+          className="order-1 lg:order-2 relative bg-white w-full h-[55vh] sm:h-[65vh] lg:h-auto overflow-hidden"
         >
-          <video
-            ref={videoRef}
-            data-testid="hero-video"
-            src={VIDEO_URL}
-            poster="/popcycle-rider.jpg"
-            autoPlay
-            muted
-            playsInline
-            loop={false}
-            preload="auto"
-            className="w-full h-full object-contain bg-white"
-            style={{
-              opacity: 1,
-              transition: "opacity 80ms linear",
-              borderRadius: "24px",
-            }}
+          <img
+            data-testid="hero-image"
+            src="/popcycle-rider.jpg"
+            alt="Rider on a Popcycle folding e-bike along the LA coast"
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       </div>
