@@ -1,0 +1,78 @@
+{
+  "theme": "light",
+  "archetype": "4 (Swiss & High-Contrast - Minimalist Editorial)",
+  "design_philosophy": "Editorial, minimal, cinematic. Think high-end lifestyle brand (Aesop/Kinfolk) applied to E-Bikes. Generous white space, muted monochromatic palette. Never use generic 'tech startup' visuals.",
+  "colors": {
+    "background": "#FFFFFF",
+    "text_primary": "#000000",
+    "text_secondary": "#6F6F6F",
+    "accent": "#000000",
+    "surface": "#FFFFFF",
+    "border": "#E5E5E5"
+  },
+  "typography": {
+    "font_family": {
+      "heading": "'Instrument Serif', serif",
+      "body": "'Inter', sans-serif"
+    },
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-none",
+      "h2": "text-4xl sm:text-5xl tracking-tight leading-none",
+      "h3": "text-2xl sm:text-3xl tracking-tight",
+      "body": "text-base sm:text-lg leading-relaxed text-[#6F6F6F]",
+      "nav_and_labels": "text-sm font-medium tracking-wide text-[#6F6F6F]"
+    }
+  },
+  "animations": {
+    "framer_motion_defaults": {
+      "initial": { "opacity": 0, "y": 20 },
+      "whileInView": { "opacity": 1, "y": 0 },
+      "viewport": { "once": true, "margin": "-50px" },
+      "transition": { "duration": 0.8, "ease": "easeOut" }
+    },
+    "variants": {
+      "delay_02": { "transition": { "delay": 0.2, "duration": 0.8, "ease": "easeOut" } },
+      "delay_04": { "transition": { "delay": 0.4, "duration": 0.8, "ease": "easeOut" } }
+    },
+    "hero_video": "Looping video background with fade-in/fade-out at start/end of each loop. Use a gradient overlay top+bottom from white to transparent to blend seamlessly into the next section."
+  },
+  "components": {
+    "nav": "Sticky/transparent navigation. Logo left, menu center, Begin Journey CTA right. Minimal styling, text-[#6F6F6F] for links.",
+    "cta_button": "rounded-full pill, black bg (#000000), white text, hover:scale-[1.03] transition-transform duration-300. Text: 'Begin Journey'.",
+    "features_grid": "Editorial minimalist list or spacious bento grid showcasing 6 e-bike specs (motor, battery range, fat tires, top speed, folding design, safety). Use massive spacing and typography for emphasis rather than generic cards.",
+    "pricing": "Minimalist layout (hourly / half-day / full-day / multi-day) with large Instrument Serif pricing numbers and delicate 1px dividers.",
+    "locations": "Editorial photo-text alternating layout featuring Venice Beach, Marina del Rey, Santa Monica Pier, Venice Canals. Massive images with delicate captions.",
+    "testimonials": "Carousel or grid with oversized Instrument Serif quotes and lifestyle portraits.",
+    "footer": "Minimalist footer. Large brand text 'Paradise Worldwide®' (Instrument Serif). Contact, social, hours in clean mono/sans columns."
+  },
+  "media_urls": {
+    "hero_video": "https://customer-assets.emergentagent.com/job_5b769d05-4dd4-472a-beea-7df881c7a91b/artifacts/ku52os84_Sky-blue_folding_electric_bike_r%E2%80%A6_202605071400.mp4",
+    "locations": [
+      {
+        "name": "Venice Beach",
+        "url": "https://images.unsplash.com/photo-1622995449969-dae1185a1d1c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHw0fHx2ZW5pY2UlMjBiZWFjaCUyMGxvcyUyMGFuZ2VsZXN8ZW58MHx8fHwxNzc4MTg3OTIzfDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "name": "Santa Monica Pier",
+        "url": "https://images.unsplash.com/photo-1611290883988-835639d69db9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwxfHxzYW50YSUyMG1vbmljYSUyMHBpZXIlMjBzdW5yaXNlfGVufDB8fHx8MTc3ODE4NzkyM3ww&ixlib=rb-4.1.0&q=85"
+      }
+    ],
+    "features_lifestyle": [
+      {
+        "name": "E-Bike Beach Riding",
+        "url": "https://images.unsplash.com/photo-1699253845175-43e473492e3e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHw0fHxlbGVjdHJpYyUyMGJpa2UlMjBiZWFjaCUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3NzgxODc5MjN8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "name": "E-Bike Parked on Beach",
+        "url": "https://images.unsplash.com/photo-1618520826503-12a0dcaa549e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxlbGVjdHJpYyUyMGJpa2UlMjBiZWFjaCUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3NzgxODc5MjN8MA&ixlib=rb-4.1.0&q=85"
+      }
+    ]
+  },
+  "specific_instructions": {
+    "html_head": "Must import 'Instrument Serif' and 'Inter' from Google Fonts in index.html.",
+    "brand_name": "Paradise Worldwide®",
+    "headline_format": "Beyond <span class='italic text-[#6F6F6F]'>traffic,</span> we ride <span class='italic text-[#6F6F6F]'>the coast.</span>",
+    "nav_links": ["Home", "Bikes", "Rates", "Locations", "Reach Us"],
+    "testing": "All interactive and key informational elements MUST include a 'data-testid' attribute in kebab-case."
+  }
+}
