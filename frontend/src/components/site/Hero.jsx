@@ -163,28 +163,22 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* HARD VERTICAL DIVIDER (desktop only) */}
-        <div
-          aria-hidden="true"
-          className="hidden lg:block absolute top-0 bottom-0 left-1/2 w-px bg-black/90 z-10 pointer-events-none"
-        />
-
-        {/* RIGHT — full-bleed video */}
+        {/* RIGHT — contained video on white so the bike fits fully in frame */}
         <div
           data-testid="hero-right"
-          className="order-1 lg:order-2 relative bg-black w-full h-[60vh] sm:h-[70vh] lg:h-auto overflow-hidden"
+          className="order-1 lg:order-2 relative bg-white w-full h-[55vh] sm:h-[65vh] lg:h-auto overflow-hidden flex items-center justify-center"
         >
           <video
             ref={videoRef}
             data-testid="hero-video"
             src={VIDEO_URL}
-            poster="https://images.unsplash.com/photo-1618520826503-12a0dcaa549e?crop=entropy&cs=srgb&fm=jpg&w=1600&q=70"
+            poster="/popcycle-rider.jpg"
             autoPlay
             muted
             playsInline
             loop={false}
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="w-full h-full object-contain"
             style={{ opacity: 1, transition: "opacity 80ms linear" }}
           />
         </div>

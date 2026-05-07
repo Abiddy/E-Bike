@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import useReveal from "../../hooks/useReveal";
 
-const IMG_LIFESTYLE =
-  "https://images.unsplash.com/photo-1699253845175-43e473492e3e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHw0fHxlbGVjdHJpYyUyMGJpa2UlMjBiZWFjaCUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3NzgxODc5MjN8MA&ixlib=rb-4.1.0&q=85";
-
-const IMG_PARKED =
-  "https://images.unsplash.com/photo-1618520826503-12a0dcaa549e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxlbGVjdHJpYyUyMGJpa2UlMjBiZWFjaCUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3NzgxODc5MjN8MA&ixlib=rb-4.1.0&q=85";
+const VIDEO_BOARDWALK = "/boardwalk.mp4";
+const IMG_RIDER = "/popcycle-rider.jpg";
+const IMG_STUDIO = "/popcycle-studio.jpg";
 
 export const Editorial = () => {
   const ref = useReveal();
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const p = v.play();
+    if (p && typeof p.catch === "function") p.catch(() => {});
+  }, []);
   return (
     <section
       ref={ref}
@@ -56,18 +63,24 @@ export const Editorial = () => {
 
         <div className="lg:col-span-7 relative">
           <div className="reveal reveal-delay-1 relative w-full overflow-hidden bg-[#f4f4f4]">
-            <img
-              src={IMG_LIFESTYLE}
-              alt="A rider cruising the Los Angeles coast on a Paradise Worldwide e-bike"
-              className="w-full h-[420px] sm:h-[560px] object-cover transition-transform duration-[1200ms] hover:scale-105"
-              loading="lazy"
+            <video
+              ref={videoRef}
+              data-testid="editorial-video"
+              src={VIDEO_BOARDWALK}
+              poster={IMG_RIDER}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="w-full h-[420px] sm:h-[560px] object-cover"
             />
           </div>
-          <div className="reveal reveal-delay-3 hidden md:block absolute -bottom-16 -left-10 w-[260px] h-[320px] overflow-hidden bg-[#f4f4f4] border border-white shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)]">
+          <div className="reveal reveal-delay-3 hidden md:block absolute -bottom-16 -left-10 w-[260px] h-[320px] overflow-hidden bg-white border border-white shadow-[0_30px_60px_-20px_rgba(0,0,0,0.25)]">
             <img
-              src={IMG_PARKED}
-              alt="Folding e-bike parked at the beach"
-              className="w-full h-full object-cover"
+              src={IMG_STUDIO}
+              alt="Popcycle folding electric bike — studio shot"
+              className="w-full h-full object-contain p-4"
               loading="lazy"
             />
           </div>
