@@ -1,0 +1,37 @@
+{
+  "summary": "Frontend-only e2e testing of Paradise Worldwide cinematic landing page. Verified rendering, content, anchor scrolling, data-testids, image loads, footer year (2026), responsive breakpoints (1440/768/390 — no horizontal overflow), and console errors (none). All 10 sections render correctly with expected copy and testids. ONE CRITICAL ISSUE: the hero <video> fails to play in the browser (MediaError code 4 = MEDIA_ERR_SRC_NOT_SUPPORTED, networkState=3 NETWORK_NO_SOURCE, readyState=0, duration=NaN). The fade-loop animation therefore never engages and opacity stays at 0 — users see a static white hero instead of the intended cinematic looping video background.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "Hero.jsx",
+        "issue": "Hero video does not play. The HEAD request to the customer-assets MP4 URL returns 200 with content-type video/mp4 (size ~2.9MB), but the <video> element reports MediaError.code=4 (MEDIA_ERR_SRC_NOT_SUPPORTED), networkState=3 (NO_SOURCE), readyState=0, duration=NaN, paused=true. As a result the requestAnimationFrame fade loop never sees a valid duration and v.style.opacity stays at '0' indefinitely — the hero shows a blank white background instead of the cinematic video. Likely cause: the CDN is not honoring HTTP Range requests, or the MP4 is not encoded with a browser-friendly codec (h264 baseline/main + AAC). Additionally, the URL contains a percent-encoded ellipsis (%E2%80%A6) which sometimes interacts poorly with media element source resolution.",
+        "selector": "[data-testid=\"hero-video\"]",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Investigate why the hero video src returns MEDIA_ERR_SRC_NOT_SUPPORTED. Try (1) fetching the file with curl and inspecting `Accept-Ranges` and codec via `ffprobe`, (2) re-uploading a clean h264+aac mp4 with faststart enabled, or (3) renaming the asset to remove the %E2%80%A6 ellipsis from the URL.",
+    "Add a `poster` attribute and/or a static fallback image to the hero <video> so the hero is visually populated even when the video cannot decode.",
+    "Consider adding an `onError` handler on the <video> to log/surface decode failures during dev."
+  ],
+  "critical_code_review_comments": [
+    "Hero.jsx fade loop is tightly coupled to v.duration; when duration is NaN the opacity is stuck at 0 — consider a fallback that just sets opacity=1 if duration never resolves within e.g. 3s, so the video at least appears solid when it eventually loads.",
+    "Footer.jsx column links all point to `#reach`. Consider linking 'Hourly/Half day/Full day/Multi-day' under Rides to `#rates`, and 'Venice Beach/Marina del Rey/Santa Monica' under Studio to `#locations` for better intra-page navigation.",
+    "Locations.jsx reuses IMG_VENICE for both 'Venice Beach Loop' and 'Santa Monica Pier Cruise' — the Santa Monica route shows a Venice Beach photograph (minor content accuracy issue).",
+    "Editorial section heading 'Quiet machines. Loud horizons.' — only the second line is italicized; reads well, no action needed.",
+    "Marquee section uses `aria-hidden=\"true\"` correctly (decorative)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "95% (1 critical issue: hero video does not decode)"},
+  "test_credentials": "N/A — no auth in this app",
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All sections, testids, anchor scrolling, responsive layout (1440/768/390), images, footer year (2026), and copy verified working. Console is clean (0 errors). The single outstanding bug is the hero <video> element refusing to decode the customer-assets MP4 (MediaError 4). When retesting, evaluate the video element via: `document.querySelector('[data-testid=\"hero-video\"]').error.code` — should be null after fix. Also verify `duration` resolves to a finite number and `opacity` transitions away from 0.",
+  "rca of the issue": "Root cause: HTML5 <video> reports MEDIA_ERR_SRC_NOT_SUPPORTED for the customer-assets MP4 even though a HEAD request returns 200 OK with content-type video/mp4 and content-length 2,979,179 bytes. The browser refuses to demux/decode the resource. The two most common causes are: (a) CDN doesn't support byte-range requests required by media element streaming, (b) the mp4 is not h264+aac with `moov` atom at the start (faststart). Reproduction: open the site in any browser, open devtools, run `document.querySelector('video').error` — code is 4. Mitigation options: re-encode with `ffmpeg -i input.mp4 -c:v libx264 -profile:v baseline -pix_fmt yuv420p -c:a aac -movflags +faststart out.mp4`, re-upload to customer-assets, update VIDEO_URL in Hero.jsx. Add a `poster` fallback image as defensive UX. Also recommended: improve the fade loop to default opacity=1 when duration is NaN after a 3s timeout."
+}

@@ -1,0 +1,158 @@
+/* Paradise Worldwide — Theme
+   Animations & cinematic helpers
+*/
+
+@keyframes fade-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise {
+  opacity: 0;
+  animation: fade-rise 0.8s ease-out forwards;
+}
+
+.animate-fade-rise-delay {
+  opacity: 0;
+  animation: fade-rise 0.8s ease-out 0.2s forwards;
+}
+
+.animate-fade-rise-delay-2 {
+  opacity: 0;
+  animation: fade-rise 0.8s ease-out 0.4s forwards;
+}
+
+.animate-fade-rise-delay-3 {
+  opacity: 0;
+  animation: fade-rise 0.8s ease-out 0.6s forwards;
+}
+
+/* Reveal-on-scroll: starts hidden, animates when .is-visible toggled */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* Custom selection */
+::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Subtle hover pill underline */
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: #000000;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.4s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Marquee for the running ribbon */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+/* Hero gradient overlay — keeps text legible without darkening the video */
+.hero-overlay {
+  background:
+    linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 18%, rgba(255, 255, 255, 0) 70%, #ffffff 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 0.35) 100%);
+}
+
+/* Thin top divider */
+.hairline {
+  height: 1px;
+  background: #e5e5e5;
+}
+
+/* Number badge for spec list */
+.spec-num {
+  font-family: var(--font-body);
+  font-feature-settings: 'tnum';
+  letter-spacing: 0.04em;
+}
+
+/* Button base */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #000000;
+  color: #ffffff;
+  transition:
+    transform 0.35s ease,
+    background-color 0.35s ease;
+}
+.btn-pill:hover {
+  transform: scale(1.03);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: transparent;
+  color: #000000;
+  border: 1px solid #000000;
+  transition:
+    transform 0.35s ease,
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+.btn-ghost:hover {
+  background: #000000;
+  color: #ffffff;
+  transform: scale(1.03);
+}

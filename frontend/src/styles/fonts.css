@@ -1,0 +1,29 @@
+/* Paradise Worldwide — Typography
+   Display: Instrument Serif (editorial, calm, cinematic)
+   Body: Inter (clean, neutral)
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-body);
+  background: #ffffff;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: 'liga', 'dlig', 'kern';
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
